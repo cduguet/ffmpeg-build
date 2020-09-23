@@ -235,6 +235,7 @@ compileFfmpeg(){
       --extra-cflags="-I $DEST_DIR/include -I $CUDA_DIR/include/" \
       --extra-ldflags="-L $DEST_DIR/lib -L $CUDA_DIR/lib64/" \
       --extra-libs="-lpthread" \
+      --enable-nonfree \
       --enable-cuda \
       --enable-cuda-sdk \
       --enable-cuvid \
@@ -251,7 +252,6 @@ compileFfmpeg(){
       --enable-libvpx \
       --enable-libx264 \
       --enable-libx265 \
-      --enable-nonfree \
       --enable-libaom \
       --enable-nvenc
     Make install distclean
@@ -262,16 +262,16 @@ installLibs
 #installCUDASDK
 installNvidiaSDK
 
-#compileNasm
-#compileYasm
-#compileLibX264
-#compileLibX265
-#compileLibAom
-#compileLibVpx
-#compileLibfdkcc
-#compileLibMP3Lame
-#compileLibOpus
-#compileLibAss
+compileNasm
+compileYasm
+compileLibX264
+compileLibX265
+compileLibAom
+compileLibVpx
+compileLibfdkcc
+compileLibMP3Lame
+compileLibOpus
+compileLibAss
 # TODO: libogg
 # TODO: libvorbis
 compileFfmpeg
