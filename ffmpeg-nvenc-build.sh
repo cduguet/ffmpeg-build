@@ -46,15 +46,16 @@ Clone() {
 PKGS="autoconf automake libtool patch make cmake bzip2 unzip wget git mercurial"
 
 installAptLibs() {
-    sudo apt-get update
-    sudo apt-get -y --force-yes install $PKGS \
+     apt-get update
+     apt-get -y --force-yes install $PKGS \
       build-essential pkg-config texi2html software-properties-common \
       libfreetype6-dev libgpac-dev libsdl1.2-dev libtheora-dev libva-dev \
-      libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev zlib1g-dev
+      libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev \
+      libfribidi-dev zlib1g-dev
 }
 
 installYumLibs() {
-    sudo yum -y install $PKGS freetype-devel gcc gcc-c++ pkgconfig zlib-devel \
+     yum -y install $PKGS freetype-devel gcc gcc-c++ pkgconfig zlib-devel \
       libtheora-devel libvorbis-devel libva-devel cmake3
 }
 
@@ -71,20 +72,20 @@ installCUDASDKdeb() {
     UBUNTU_VERSION="$1"
     local CUDA_REPO_URL="https://developer.download.nvidia.com/compute/cuda/repos/ubuntu${UBUNTU_VERSION}/x86_64/cuda-repo-ubuntu${UBUNTU_VERSION}_${CUDA_VERSION}_amd64.deb"
     Wget "$CUDA_REPO_URL"
-    sudo dpkg -i "$(basename "$CUDA_REPO_URL")"
-    sudo apt-key adv --fetch-keys "$CUDA_REPO_KEY"
-    sudo apt-get -y update
-    sudo apt-get -y install cuda
+     dpkg -i "$(basename "$CUDA_REPO_URL")"
+     apt-key adv --fetch-keys "$CUDA_REPO_KEY"
+     apt-get -y update
+     apt-get -y install cuda
 
-    sudo env LC_ALL=C.UTF-8 add-apt-repository -y ppa:graphics-drivers/ppa
-    sudo apt-get -y update
-    sudo apt-get -y upgrade
+     env LC_ALL=C.UTF-8 add-apt-repository -y ppa:graphics-drivers/ppa
+     apt-get -y update
+     apt-get -y upgrade
 }
 
 installCUDASDKyum() {
     rpm -q cuda-repo-rhel7 2>/dev/null ||
-       sudo yum install -y "https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-${CUDA_VERSION}.x86_64.rpm"
-    sudo yum install -y "cuda${CUDA_RPM_VER}"
+        yum install -y "https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-${CUDA_VERSION}.x86_64.rpm"
+     yum install -y "cuda${CUDA_RPM_VER}"
 }
 
 installCUDASDK() {
@@ -217,7 +218,7 @@ compileLibAss() {
     tar Jxvf "libass-$LASS_VERSION.tar.xz"
     cd "libass-$LASS_VERSION"
     autoreconf -fiv
-    ./configure --prefix="$DEST_DIR" --disable-shared
+    ./configure --prefix="$DEST_DIR" --disable-shared --disable-require-system-font-provider
     Make install distclean
 }
 
@@ -237,7 +238,7 @@ compileFfmpeg(){
       --enable-cuda \
       --enable-cuda-sdk \
       --enable-cuvid \
-      --enable-libnpp \
+      #--enable-libnpp \
       --enable-gpl \
       --enable-libass \
       --enable-libfdk-aac \
@@ -258,19 +259,19 @@ compileFfmpeg(){
 }
 
 installLibs
-installCUDASDK
+#installCUDASDK
 installNvidiaSDK
 
-compileNasm
-compileYasm
-compileLibX264
-compileLibX265
-compileLibAom
-compileLibVpx
-compileLibfdkcc
-compileLibMP3Lame
-compileLibOpus
-compileLibAss
+#compileNasm
+#compileYasm
+#compileLibX264
+#compileLibX265
+#compileLibAom
+#compileLibVpx
+#compileLibfdkcc
+#compileLibMP3Lame
+#compileLibOpus
+#compileLibAss
 # TODO: libogg
 # TODO: libvorbis
 compileFfmpeg
