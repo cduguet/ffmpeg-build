@@ -237,9 +237,8 @@ compileFfmpeg(){
       --extra-libs="-lpthread" \
       --enable-nonfree \
       --enable-cuda \
-      --enable-cuda-sdk \
+      --enable-cuda-nvcc \
       --enable-cuvid \
-      #--enable-libnpp \
       --enable-gpl \
       --enable-libass \
       --enable-libfdk-aac \
