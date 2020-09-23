@@ -19,7 +19,8 @@ CUDA_RPM_VER="-10-1"
 CUDA_REPO_KEY="http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub"
 CUDA_DIR="/usr/local/cuda"
 WORK_DIR="$HOME/ffmpeg-build-static-sources"
-DEST_DIR="$HOME/ffmpeg-build-static-binaries"
+#DEST_DIR="$HOME/ffmpeg-build-static-binaries"
+DEST_DIR="/usr/local/"
 
 mkdir -p "$WORK_DIR" "$DEST_DIR" "$DEST_DIR/bin"
 
